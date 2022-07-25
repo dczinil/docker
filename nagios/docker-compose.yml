@@ -1,10 +1,13 @@
 version: "3.6"
 
 services:
+
+  app:
+    image: nagios:0.5
+    ports:
+      - "8080:80"
   wordpress:
     image: wordpress:php7.2-apache
-    depends_on:
-      - mysql
     ports:
       - 8081:80
     environment:
@@ -21,10 +24,5 @@ services:
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: B47m4n03
-    # volumes:
-    #   - ~/Documents/pro/docker/mysql-data:/var/lib/mysql
-
-  app:
-    image: nagios:0.4
-    ports:
-      - "8080:80"
+    volumes:
+      - ~/Documents/pro/docker/nagios/mysql-data:/var/lib/mysql
